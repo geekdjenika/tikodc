@@ -18,7 +18,16 @@ class NavigationContainer extends StatefulWidget {
 
 class _NavigationContainerState extends State<NavigationContainer> {
   int _selectePageIndex = 0;
-  static const List<Widget> _pages = [Accueil(),AjouterVideo(),ChoixConnexion(),Connexion(),Decouvrir(),Inscrription(),Message(),Profil()];
+  static const List<Widget> _pages = [
+    Accueil(),
+    AjouterVideo(),
+    ChoixConnexion(),
+    Connexion(),
+    Decouvrir(),
+    Inscrription(),
+    Message(),
+    Profil()
+  ];
   void _onIconTapped(int index) {
     setState(() {
       _selectePageIndex = index;
@@ -30,7 +39,7 @@ class _NavigationContainerState extends State<NavigationContainer> {
       body: Center(
         child: _pages[_selectePageIndex],
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(selectedPageIndex: _selectePageIndex,onIconTap: _onIconTapped),
+      bottomNavigationBar: CustomBottomNavigationBar(selectedPageIndex: _selectePageIndex,onIconTap: _onIconTapped,context: context,),
     );
   }
 }

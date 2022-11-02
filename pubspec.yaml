@@ -52,29 +52,29 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "lib/assets/images/logo.png"
+  image_path: "lib/assets/images/launcher_icon.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
-    image_path: "lib/assets/images/logo.png"
+    image_path: "lib/assets/images/launcher_icon.png"
     background_color: "#000000"
     theme_color: "#000000"
   windows:
     generate: true
-    image_path: "lib/assets/images/logo.png"
+    image_path: "lib/assets/images/launcher_icon.png"
     icon_size: 48
 
 flutter_native_splash:
   color: "#000000"
   color_dark: "#000000"
-  image: lib/assets/images/logo.png
-  image_dark: lib/assets/images/logo.png
+  image: lib/assets/images/ic_splash.png
+  image_dark: lib/assets/images/ic_splash.png
 
   android_12:
     icon_background_color: "#000000"
     icon_background_color_dark: "#000000"
-    image: lib/assets/images/logo.png
-    image_dark: lib/assets/images/logo.png
+    image: lib/assets/images/ic_splash12.png
+    image_dark: lib/assets/images/ic_splash12.png
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
