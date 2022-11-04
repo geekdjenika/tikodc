@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -57,7 +55,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           SvgPicture.asset(
-            'lib/assets/images/${isSelected ? iconName + '_filled' : iconName}.svg',
+            'assets/images/${isSelected ? iconName + '_filled' : iconName}.svg',
             height: MediaQuery.of(context).size.height * 0.025,
             width: MediaQuery.of(context).size.height * 0.025,
             color: iconColor,

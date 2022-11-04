@@ -1,5 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:tikodc/widgets/home_side_bar.dart';
+import 'package:tikodc/widgets/video_detail.dart';
+import 'package:tikodc/widgets/video_tile.dart';
+
+import '../_mock_data/mock.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({Key? key}) : super(key: key);
@@ -10,9 +16,31 @@ class Accueil extends StatefulWidget {
 
 class _AccueilState extends State<Accueil> {
   bool _isPourtoiSelected = true;
+  int _snappedPageIndex = 0;
+
+  List chaine = [];
+
+  List _nextVideo() {
+    List<int> numberList=[];
+    while(numberList.length<videos.length){
+      int random_number = Random().nextInt(videos.length);
+      if (!numberList.contains(random_number)){
+        numberList.add(random_number);
+      }
+    }
+    print(numberList);
+    return numberList;
+  }
+
+  @override
+  initState() {
+    chaine = _nextVideo();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -80,15 +108,23 @@ class _AccueilState extends State<Accueil> {
         ),
       ),
       body: PageView.builder(
-          onPageChanged: (int page) => {print("Page changé en $page")},
+          onPageChanged: (int page) => {
+            setState((){
+              _snappedPageIndex = page;
+            }),
+          },
           scrollDirection: Axis.vertical,
-          itemCount: 10,
+          itemCount: videos.length,
+
           itemBuilder: (context, index) {
         return Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            Container(
-              color: Colors.purple,
+            VideoTile(
+                video: videos[chaine.elementAt(index)],
+                snappedPageIndex: _snappedPageIndex,
+                currentIndex: index,
+
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -97,14 +133,13 @@ class _AccueilState extends State<Accueil> {
                   flex: 3,
                   child: Container(
                     height: MediaQuery.of(context).size.height / 4,
-                    color: Colors.amber,
+                    child: VideoDetail(video: videos[index],),
                   ),
                 ),
                 Expanded(
                   child: Container(
-                    height: MediaQuery.of(context).size.height / 1.75,
-                    color: Colors.pink,
-                    child: HomeSideBar(),
+                    height: MediaQuery.of(context).size.height / 2,
+                    child: HomeSideBar(video: videos[index],),
                   ),
                 ),
               ],
@@ -113,5 +148,6 @@ class _AccueilState extends State<Accueil> {
         );
       })
     );
+
   }
 }
