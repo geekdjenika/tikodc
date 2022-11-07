@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:TikODC/widgets/home_side_bar.dart';
 import 'package:TikODC/widgets/video_detail.dart';
 import 'package:TikODC/widgets/video_tile.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import '../_mock_data/mock.dart';
@@ -15,6 +16,14 @@ class Accueil extends StatefulWidget {
 }
 
 class _AccueilState extends State<Accueil> {
+
+  @override
+  void initState() {
+    Firebase.initializeApp();
+    chaine = _nextVideo();
+    super.initState();
+  }
+
   bool _isPourtoiSelected = true;
   int _snappedPageIndex = 0;
 
@@ -30,12 +39,6 @@ class _AccueilState extends State<Accueil> {
     }
     print(numberList);
     return numberList;
-  }
-
-  @override
-  initState() {
-    chaine = _nextVideo();
-    super.initState();
   }
 
   @override

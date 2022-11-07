@@ -7,7 +7,6 @@ import 'package:TikODC/screens/decouvrir.dart';
 import 'package:TikODC/screens/message.dart';
 import 'package:TikODC/screens/profil.dart';
 import 'package:TikODC/widgets/custom_bottom_navigation_bar.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class NavigationContainer extends StatefulWidget {
@@ -34,13 +33,6 @@ class _NavigationContainerState extends State<NavigationContainer> {
       _selectePageIndex = index;
     });
   }
-
-  @override
-  void initState() {
-    Firebase.initializeApp();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

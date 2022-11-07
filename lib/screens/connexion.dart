@@ -172,7 +172,7 @@ class _ConnexionState extends State<Connexion> {
               selectorTextStyle: const TextStyle(color: Colors.black),
               textFieldController: _numeroController,
               // formatInput: false,
-              maxLength: 9,
+              maxLength: 11,
               keyboardType: const TextInputType.numberWithOptions(
                   signed: true, decimal: true),
               cursorColor: Colors.black,

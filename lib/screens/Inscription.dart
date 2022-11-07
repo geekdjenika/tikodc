@@ -2,6 +2,7 @@ import 'package:TikODC/screens/inscription_next.dart';
 import 'package:country_phone_code_picker/controller/country_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class Inscrription extends StatefulWidget {
@@ -123,6 +124,10 @@ class _InscrriptionState extends State<Inscrription> {
             ],
             elevation: 1,
             bottom: TabBar(
+              indicatorColor: Colors.black,
+              indicator: BoxDecoration(
+
+              ),
               labelColor: Colors.black,
               labelPadding: EdgeInsets.only(left: 30,right: 30),
               tabs: [
@@ -130,7 +135,7 @@ class _InscrriptionState extends State<Inscrription> {
                   text: "Téléphone",
                 ),
                 Tab(
-                  text: "E-mail/nom\nd'utilisateur",
+                  text: "E-mail",
                 )
               ],
             ),
@@ -177,9 +182,9 @@ class _InscrriptionState extends State<Inscrription> {
                     selectorTextStyle: const TextStyle(color: Colors.black),
                     textFieldController: _numeroController,
                     // formatInput: false,
-                    maxLength: 9,
+                    maxLength: 11,
                     keyboardType: const TextInputType.numberWithOptions(
-                        signed: true, decimal: true),
+                        signed: false, decimal: false),
                     cursorColor: Colors.black,
                     inputDecoration: InputDecoration(
                       contentPadding:
@@ -202,12 +207,12 @@ class _InscrriptionState extends State<Inscrription> {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: RichText(
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.left,
                   text: TextSpan(
-                      style: TextStyle(color: Colors.grey, fontSize: 13), //apply style to all
+                      style: TextStyle(color: Colors.grey, fontSize: 14), //apply style to all
                       children: [
                         TextSpan(text: 'Ton numéro de téléphone servira à améliorer ton expérience sur TikTok, notamment en te mettant en relation avec des personnes que tu connais peut-être, en personnalisant tes publicités, etc. Si tu t\'inscris par SMS, des frais peuvent s\'appliquer.', style: TextStyle(fontWeight: FontWeight.normal)),
-                        TextSpan(text: 'En savoir plus', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                        TextSpan(text: 'En savoir plus', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, decoration: TextDecoration.underline)),
                       ]
                   )
               ),
@@ -233,7 +238,9 @@ class _InscrriptionState extends State<Inscrription> {
               ),
 
               onPressed: () => {
-                isValid ? print("Merci") : null
+                Fluttertoast.showToast(
+                  msg: "Cet option ne'est pas disponible pour le moment, continuer avec votre e-mail"
+                )
               },
             ),
           ],
@@ -260,10 +267,12 @@ class _InscrriptionState extends State<Inscrription> {
             ),
           ),
 
+          SizedBox(height: 25,),
+
           RichText(
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.left,
               text: TextSpan(
-                  style: TextStyle(color: Colors.grey, fontSize: 13), //apply style to all
+                  style: TextStyle(color: Colors.grey, fontSize: 14), //apply style to all
                   children: [
                     TextSpan(text: 'En continuant, tu acceptes les  ', style: TextStyle(fontWeight: FontWeight.normal)),
                     TextSpan(text: 'Conditions d\'utilisation', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
@@ -294,7 +303,7 @@ class _InscrriptionState extends State<Inscrription> {
             ),
 
             onPressed: () => {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => InscriptionNext()))
+              Navigator.push(context, MaterialPageRoute(builder: (context) => InscriptionNext(email: _emailController.text,)))
             },
           ),
 

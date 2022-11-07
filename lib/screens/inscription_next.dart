@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ndialog/ndialog.dart';
 
 class InscriptionNext extends StatefulWidget {
-  const InscriptionNext({Key? key}) : super(key: key);
+  const InscriptionNext({Key? key, required this.email}) : super(key: key);
+  final String email;
 
   @override
   State<InscriptionNext> createState() => _InscriptionNextState();
@@ -10,25 +13,26 @@ class InscriptionNext extends StatefulWidget {
 
 class _InscriptionNextState extends State<InscriptionNext> {
 
-  late TextEditingController _emailController;
+  late TextEditingController _mdpController;
   final _eformKey = GlobalKey<FormState>();
 
   bool isValid = false;
 
   @override
   void initState() {
-    _emailController = TextEditingController();
+    _mdpController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _mdpController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    ProgressDialog progressDialog;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -61,90 +65,72 @@ class _InscriptionNextState extends State<InscriptionNext> {
           ),
         ],
         elevation: 1,
-        bottom: TabBar(
-          labelColor: Colors.black,
-          labelPadding: EdgeInsets.only(left: 30,right: 30),
-          tabs: [
-            Tab(
-              text: "Téléphone",
-            ),
-            Tab(
-              text: "E-mail/nom\nd'utilisateur",
-            )
-          ],
-        ),
 
       ),
-      body: Form(
-        key: _eformKey,
-        autovalidateMode: AutovalidateMode.always,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextFormField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                hintText: "Adresse e-mail",
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey,
+      body: Padding(
+        padding: const EdgeInsets.only(top: 25.0, left: 20, right: 20, bottom: 10),
+        child: Form(
+          key: _eformKey,
+          autovalidateMode: AutovalidateMode.always,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+              RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                      style: TextStyle(color: Colors.black, fontSize: 15), //apply style to all
+                      children: [
+                        TextSpan(text: 'Créer un mot de passe', style: TextStyle(fontWeight: FontWeight.w800))
+                      ]
+                  )
+              ),
+              SizedBox(height: 20,),
+              TextFormField(
+                controller: _mdpController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: "Saisis le mot de passe",
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  helperText: "Entrer un mot de passe sécurisé"
+                ),
+              ),
+              SizedBox(height: 25,),
+              MaterialButton(
+                disabledColor: Colors.grey.shade300,
+                disabledTextColor: Colors.black,
+                minWidth: double.infinity,
+                color: Colors.redAccent,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15.0,bottom: 15.0),
+                  child: Text(
+                    "Suivant",
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600
+                    ),
                   ),
                 ),
-              ),
-            ),
 
-            RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                    style: TextStyle(color: Colors.grey, fontSize: 13), //apply style to all
-                    children: [
-                      TextSpan(text: 'En continuant, tu acceptes les  ', style: TextStyle(fontWeight: FontWeight.normal)),
-                      TextSpan(text: 'Conditions d\'utilisation', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
-                      TextSpan(text: '  de TikTok et confirmes avoir lu les  ', style: TextStyle(fontWeight: FontWeight.normal)),
-                      TextSpan(text: 'Politique de confidentialité', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
-                      TextSpan(text: ' de TikTok.', style: TextStyle(fontWeight: FontWeight.normal)),
-                    ]
-                )
-            ),
+                onPressed: () async => {
+                  await FirebaseAuth.instance.createUserWithEmailAndPassword(email: widget.email, password: _mdpController.text),
+                  await Future.delayed(Duration(seconds: 5)),
+                  progressDialog = new ProgressDialog(context, title: Text("Création du compte"), message: Text("Patientez un instant !")),
+                  progressDialog.setLoadingWidget(CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(Colors.red))),
+                  progressDialog.setTitle(Text("Création de votre compte")),
+                  progressDialog.setMessage(Text("Patientez 5 secondes")),
+                  progressDialog.show(),
 
-            SizedBox(height: 25,),
-            GestureDetector(
-              onTap: () => {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => InscriptionNext()))
-              },
-              child: Text(
-                'Mot de passe oublié ?',
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: 25,),
-            MaterialButton(
-              disabledColor: Colors.grey.shade300,
-              disabledTextColor: Colors.black,
-              minWidth: double.infinity,
-              color: Colors.redAccent,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 15.0,bottom: 15.0),
-                child: Text(
-                  "Connexion",
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600
-                  ),
-                ),
+                },
               ),
 
-              onPressed: () => {
-
-              },
-            ),
-
-          ],
+            ],
+          ),
         ),
       )
     );
