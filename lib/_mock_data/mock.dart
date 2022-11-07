@@ -1,5 +1,4 @@
-
-import 'package:tikodc/models/user.dart';
+import 'package:TikODC/models/user.dart';
 
 import '../models/video.dart';
 

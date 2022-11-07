@@ -1,4 +1,5 @@
-import 'package:tikodc/models/user.dart';
+
+import 'package:TikODC/models/user.dart';
 
 class Video {
   final String videoUrl;

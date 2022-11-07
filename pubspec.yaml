@@ -1,4 +1,4 @@
-name: tikodc
+name: TikODC
 description: TikODC est un modèle d’interface utilisateur d’application mobile de diffusion vidéo courte.
 
 # The following line prevents the package from being accidentally published to
@@ -44,6 +44,12 @@ dependencies:
   lottie: ^1.4.3
   flutter_svg: ^1.1.6
   google_fonts: ^3.0.1
+  intl_phone_number_input: ^0.7.1
+  font_awesome_flutter: ^10.2.1
+  country_phone_code_picker: ^0.0.41
+  wakelock: ^0.6.2
+  firebase_auth: ^4.1.1
+  firebase_core: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +75,7 @@ flutter_native_splash:
   color_dark: "#000000"
   image: lib/assets/images/ic_splash.png
   image_dark: lib/assets/images/ic_splash.png
+  web: false
 
   android_12:
     icon_background_color: "#000000"

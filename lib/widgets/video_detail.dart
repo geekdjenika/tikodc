@@ -1,7 +1,7 @@
+import 'package:TikODC/models/video.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tikodc/models/video.dart';
 
 class VideoDetail extends StatelessWidget {
   const VideoDetail({Key? key, required this.video}) : super(key: key);

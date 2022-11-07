@@ -1,9 +1,9 @@
 import 'dart:math';
 
+import 'package:TikODC/widgets/home_side_bar.dart';
+import 'package:TikODC/widgets/video_detail.dart';
+import 'package:TikODC/widgets/video_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:tikodc/widgets/home_side_bar.dart';
-import 'package:tikodc/widgets/video_detail.dart';
-import 'package:tikodc/widgets/video_tile.dart';
 
 import '../_mock_data/mock.dart';
 
@@ -133,13 +133,13 @@ class _AccueilState extends State<Accueil> {
                   flex: 3,
                   child: Container(
                     height: MediaQuery.of(context).size.height / 4,
-                    child: VideoDetail(video: videos[index],),
+                    child: VideoDetail(video: videos[chaine.elementAt(index)],),
                   ),
                 ),
                 Expanded(
                   child: Container(
                     height: MediaQuery.of(context).size.height / 2,
-                    child: HomeSideBar(video: videos[index],),
+                    child: HomeSideBar(video: videos[chaine.elementAt(index)],),
                   ),
                 ),
               ],

@@ -1,7 +1,9 @@
+import 'package:TikODC/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:tikodc/models/video.dart';
 import 'package:video_player/video_player.dart';
+import 'package:wakelock/wakelock.dart';
+
 
 class VideoTile extends StatefulWidget {
   const VideoTile({Key? key, required this.video, required this.snappedPageIndex, required this.currentIndex}) : super(key: key);
@@ -25,13 +27,14 @@ class _VideoTileState extends State<VideoTile> {
     _videoController = VideoPlayerController.asset('assets/videos/${widget.video.videoUrl}');
     _initilizeVideoPlayer = _videoController.initialize();
     _videoController.setLooping(true);
-
+    _isVideoPlaying ? Wakelock.enable : Wakelock.disable();
     super.initState();
   }
 
   @override
   void dispose() {
     _videoController.dispose();
+    //_isVideoPlaying = false;
     super.dispose();
   }
 

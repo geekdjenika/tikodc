@@ -1,7 +1,6 @@
+import 'package:TikODC/auth/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tikodc/navigation_container.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.varelaRoundTextTheme(),
       ),
-      home: const NavigationContainer(),
+      home: MainPage(),
     );
   }
 }

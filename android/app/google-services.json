@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "373702769037",
+    "project_id": "tikodc-e634a",
+    "storage_bucket": "tikodc-e634a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373702769037:android:e0a0d019488558fcb6e5c4",
+        "android_client_info": {
+          "package_name": "geek.djenika.tikodc.tikodc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373702769037-m45psa1lc34bgnc9hddjgcih7vf79anf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8fKJd0S4y39_XDSihfk6UR4DWeU-wbpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373702769037-m45psa1lc34bgnc9hddjgcih7vf79anf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

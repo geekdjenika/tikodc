@@ -1,8 +1,8 @@
 import 'dart:math';
 
+import 'package:TikODC/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tikodc/models/video.dart';
 
 class HomeSideBar extends StatefulWidget {
   const HomeSideBar({Key? key, required this.video}) : super(key: key);

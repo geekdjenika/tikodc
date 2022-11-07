@@ -1,13 +1,14 @@
+import 'package:TikODC/screens/Inscription.dart';
+import 'package:TikODC/screens/accueil.dart';
+import 'package:TikODC/screens/ajouter_video.dart';
+import 'package:TikODC/screens/choixconnexion.dart';
+import 'package:TikODC/screens/connexion.dart';
+import 'package:TikODC/screens/decouvrir.dart';
+import 'package:TikODC/screens/message.dart';
+import 'package:TikODC/screens/profil.dart';
+import 'package:TikODC/widgets/custom_bottom_navigation_bar.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:tikodc/screens/Inscription.dart';
-import 'package:tikodc/screens/accueil.dart';
-import 'package:tikodc/screens/ajouter_video.dart';
-import 'package:tikodc/screens/choixconnexion.dart';
-import 'package:tikodc/screens/connexion.dart';
-import 'package:tikodc/screens/decouvrir.dart';
-import 'package:tikodc/screens/message.dart';
-import 'package:tikodc/screens/profil.dart';
-import 'package:tikodc/widgets/custom_bottom_navigation_bar.dart';
 
 class NavigationContainer extends StatefulWidget {
   const NavigationContainer({Key? key}) : super(key: key);
@@ -33,6 +34,13 @@ class _NavigationContainerState extends State<NavigationContainer> {
       _selectePageIndex = index;
     });
   }
+
+  @override
+  void initState() {
+    Firebase.initializeApp();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
