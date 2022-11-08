@@ -125,9 +125,6 @@ class _InscrriptionState extends State<Inscrription> {
             elevation: 1,
             bottom: TabBar(
               indicatorColor: Colors.black,
-              indicator: BoxDecoration(
-
-              ),
               labelColor: Colors.black,
               labelPadding: EdgeInsets.only(left: 30,right: 30),
               tabs: [
@@ -239,7 +236,7 @@ class _InscrriptionState extends State<Inscrription> {
 
               onPressed: () => {
                 Fluttertoast.showToast(
-                  msg: "Cet option ne'est pas disponible pour le moment, continuer avec votre e-mail"
+                  msg: "Cet option n'est pas disponible pour le moment, continuer avec votre e-mail"
                 )
               },
             ),

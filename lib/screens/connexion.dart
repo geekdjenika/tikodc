@@ -1,6 +1,11 @@
+import 'package:TikODC/auth/main_page.dart';
+import 'package:TikODC/screens/reinitialiserparmail.dart';
+import 'package:TikODC/screens/reinitialiserparnumero.dart';
 import 'package:country_phone_code_picker/country_phone_code_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 class Connexion extends StatefulWidget {
   const Connexion({Key? key}) : super(key: key);
@@ -11,7 +16,8 @@ class Connexion extends StatefulWidget {
 
 class _ConnexionState extends State<Connexion> {
 
-  final _formKey = GlobalKey<FormState>();
+  final _connectformKey = GlobalKey<FormState>();
+  final _connecteformKey = GlobalKey<FormState>();
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
   late TextEditingController _numeroController;
@@ -45,12 +51,13 @@ class _ConnexionState extends State<Connexion> {
         children: [
           GestureDetector(
             onTap: () => {
-
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ReinitialiserParNumero()))
             },
             child: Container(
               alignment: Alignment.centerLeft,
               height: 30,
               child: Text(
+                
                 'Numéro de téléphone',
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     color: Colors.black,
@@ -63,7 +70,7 @@ class _ConnexionState extends State<Connexion> {
           SizedBox(height: 10,),
           GestureDetector(
             onTap: () => {
-
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ReinialiserParMail()))
             },
             child: Container(
               height: 30,
@@ -121,6 +128,7 @@ class _ConnexionState extends State<Connexion> {
           elevation: 1,
           bottom: TabBar(
             labelColor: Colors.black,
+            indicatorColor: Colors.black,
             labelPadding: EdgeInsets.only(left: 30,right: 30),
             tabs: [
               Tab(
@@ -148,70 +156,77 @@ class _ConnexionState extends State<Connexion> {
 
   _telephoneTab() {
     return Form(
-      key: _formKey,
-      child: Container(
-        child: Stack(
-          children: [
-            InternationalPhoneNumberInput(
-              onInputChanged: (PhoneNumber number) {
-                print(number.phoneNumber);
-              },
-              initialValue: PhoneNumber(
-                isoCode: "ML",
-                dialCode: "223"
-              ),
-              onInputValidated: (bool value) {
-                print(value);
-              },
-              selectorConfig: const SelectorConfig(
-
-                selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-              ),
-              ignoreBlank: false,
-              // autoValidateMode: AutovalidateMode.disabled,
-              selectorTextStyle: const TextStyle(color: Colors.black),
-              textFieldController: _numeroController,
-              // formatInput: false,
-              maxLength: 11,
-              keyboardType: const TextInputType.numberWithOptions(
-                  signed: true, decimal: true),
-              cursorColor: Colors.black,
-              inputDecoration: InputDecoration(
-                contentPadding:
-                const EdgeInsets.only(bottom: 15, left: 0),
-                border: InputBorder.none,
-                hintText: 'Numéro de Téléphone',
-                hintStyle: TextStyle(
-                    color: Colors.grey.shade500, fontSize: 16),
-              ),
-              // onSaved: (PhoneNumber number) {
-              //   print('On Saved: $number');
-              // },
-            ),
-            SizedBox(height: 25,),
-            MaterialButton(
-              disabledColor: Colors.grey.shade300,
-              disabledTextColor: Colors.black,
-              minWidth: double.infinity,
-              color: Colors.redAccent,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 15.0,bottom: 15.0),
-                child: Text(
-                  "Envoyer un code",
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600
+      key: _connectformKey,
+      child: Column(
+        children: [
+          Container(
+            child: Stack(
+              children: [
+                InternationalPhoneNumberInput(
+                  onInputChanged: (PhoneNumber number) {
+                    print(number.phoneNumber);
+                  },
+                  initialValue: PhoneNumber(
+                      isoCode: "ML",
+                      dialCode: "223"
                   ),
+                  onInputValidated: (bool value) {
+                    print(value);
+                  },
+                  selectorConfig: const SelectorConfig(
+
+                    selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                  ),
+                  ignoreBlank: false,
+                  // autoValidateMode: AutovalidateMode.disabled,
+                  selectorTextStyle: const TextStyle(color: Colors.black),
+                  textFieldController: _numeroController,
+                  // formatInput: false,
+                  maxLength: 11,
+                  keyboardType: const TextInputType.numberWithOptions(
+                      signed: true, decimal: true),
+                  cursorColor: Colors.black,
+                  inputDecoration: InputDecoration(
+                    contentPadding:
+                    const EdgeInsets.only(bottom: 15, left: 0),
+                    border: InputBorder.none,
+                    hintText: 'Numéro de Téléphone',
+                    hintStyle: TextStyle(
+                        color: Colors.grey.shade500, fontSize: 16),
+                  ),
+                  // onSaved: (PhoneNumber number) {
+                  //   print('On Saved: $number');
+                  // },
+                ),
+              ],
+            ),
+          ),
+
+          SizedBox(height: 25,),
+          MaterialButton(
+            disabledColor: Colors.grey.shade300,
+            disabledTextColor: Colors.black,
+            minWidth: double.infinity,
+            color: Colors.redAccent,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15.0,bottom: 15.0),
+              child: Text(
+                "Envoyer un code",
+                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600
                 ),
               ),
-
-              onPressed: () => {
-                isValid ? print("Merci") : null
-              },
             ),
-          ],
-        ),
+
+            onPressed: () => {
+              Fluttertoast.showToast(
+                  msg: "Cet option ne'est pas disponible pour le moment, continuer avec votre e-mail"
+              )
+            },
+          ),
+        ],
       ),
     );
 
@@ -219,7 +234,7 @@ class _ConnexionState extends State<Connexion> {
 
   _emailTab() {
     return Form(
-      key: _formKey,
+      key: _connecteformKey,
       autovalidateMode: AutovalidateMode.always,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -273,7 +288,7 @@ class _ConnexionState extends State<Connexion> {
               minWidth: double.infinity,
               color: Colors.redAccent,
               child: Padding(
-                padding: const EdgeInsets.only(top: 15.0,bottom: 15.0),
+                padding: const EdgeInsets.all(0),
                 child: Text(
                   "Connexion",
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
@@ -284,8 +299,9 @@ class _ConnexionState extends State<Connexion> {
                 ),
               ),
 
-              onPressed: () => {
-                isValid ? print("Merci") : null
+              onPressed: () async => {
+                await FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailController.text, password: _passwordController.text),
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()))
               },
             ),
 

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Profil extends StatefulWidget {
@@ -197,7 +198,7 @@ class _ProfilState extends State<Profil> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                       child: OutlinedButton(
                         onPressed: () {
-                          print('Button pressed ...');
+                          FirebaseAuth.instance.signOut();
                         },
                         child: Text(
                           'Se deconnecter',

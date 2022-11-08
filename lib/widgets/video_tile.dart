@@ -23,7 +23,7 @@ class _VideoTileState extends State<VideoTile> {
   @override
   void initState() {
 
-    _videoController = VideoPlayerController.asset('assets/videos/${widget.video.videoUrl}');
+    _videoController = VideoPlayerController.network(widget.video.videoUrl);
     _initilizeVideoPlayer = _videoController.initialize();
     _videoController.setLooping(true);
     super.initState();

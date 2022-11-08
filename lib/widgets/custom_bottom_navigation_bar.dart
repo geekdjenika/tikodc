@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar(
@@ -73,24 +74,31 @@ class CustomBottomNavigationBar extends StatelessWidget {
   }
 
   _addVideoNavItem(double height) {
-    return Center(
-      child: Container(
-        height: height - 15,
-        width: 48,
-        decoration: BoxDecoration(
-            gradient:
-                LinearGradient(colors: [Colors.blueAccent, Colors.redAccent]),
-            borderRadius: BorderRadius.circular(8)),
-        child: Center(
-          child: Container(
-            width: 41,
-            height: height - 15,
-            decoration: BoxDecoration(
-                color: selectedPageIndex == 0 || selectedPageIndex == 4 ? Colors.white : Colors.black,
-                borderRadius: BorderRadius.circular(8)),
-            child: Icon(
-              Icons.add,
-              color: selectedPageIndex == 0 || selectedPageIndex == 4 ? Colors.black : Colors.white,
+    return GestureDetector(
+      onTap: () {
+        Fluttertoast.showToast(
+            msg: "Page en cours de dévéloppement contacter djenikaa@gmail.com",
+        );
+      },
+      child: Center(
+        child: Container(
+          height: height - 15,
+          width: 48,
+          decoration: BoxDecoration(
+              gradient:
+                  LinearGradient(colors: [Colors.blueAccent, Colors.redAccent]),
+              borderRadius: BorderRadius.circular(8)),
+          child: Center(
+            child: Container(
+              width: 41,
+              height: height - 15,
+              decoration: BoxDecoration(
+                  color: selectedPageIndex == 0 || selectedPageIndex == 4 ? Colors.white : Colors.black,
+                  borderRadius: BorderRadius.circular(8)),
+              child: Icon(
+                Icons.add,
+                color: selectedPageIndex == 0 || selectedPageIndex == 4 ? Colors.black : Colors.white,
+              ),
             ),
           ),
         ),
