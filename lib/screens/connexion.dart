@@ -1,4 +1,5 @@
 import 'package:TikODC/auth/main_page.dart';
+import 'package:TikODC/navigation_container.dart';
 import 'package:TikODC/screens/reinitialiserparmail.dart';
 import 'package:TikODC/screens/reinitialiserparnumero.dart';
 import 'package:country_phone_code_picker/country_phone_code_picker.dart';
@@ -300,8 +301,8 @@ class _ConnexionState extends State<Connexion> {
               ),
 
               onPressed: () async => {
-                await FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailController.text, password: _passwordController.text),
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()))
+                //await FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailController.text, password: _passwordController.text),
+                Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationContainer()))
               },
             ),
 

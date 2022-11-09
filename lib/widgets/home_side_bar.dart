@@ -55,6 +55,8 @@ class _HomeSideBarState extends State<HomeSideBar>
                 children: [
                   Center(
                     child: Container(
+                      height: 100,
+                      width: 100,
                       child: Image.asset(
                           'assets/images/disque.png',
                       ),

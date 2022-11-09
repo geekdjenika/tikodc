@@ -1,6 +1,4 @@
-import 'package:TikODC/navigation_container.dart';
-import 'package:TikODC/screens/start.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {
@@ -9,16 +7,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if(snapshot.hasData) {
-            return NavigationContainer();
-          } else {
-            return StartPage(haveAccount: false,);
-          }
-        },
-      ),
+
     );
   }
 }

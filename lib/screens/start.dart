@@ -2,7 +2,6 @@
 import 'package:TikODC/navigation_container.dart';
 import 'package:TikODC/screens/Inscription.dart';
 import 'package:TikODC/screens/start_connect.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,7 +21,7 @@ class _StartPageState extends State<StartPage> {
 
   @override
   void initState() {
-    Firebase.initializeApp();
+    //Firebase.initializeApp();
     super.initState();
   }
 

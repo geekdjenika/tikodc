@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ndialog/ndialog.dart';
@@ -118,7 +117,7 @@ class _InscriptionNextState extends State<InscriptionNext> {
                 ),
 
                 onPressed: () async => {
-                  await FirebaseAuth.instance.createUserWithEmailAndPassword(email: widget.email, password: _mdpController.text),
+                  //await FirebaseAuth.instance.createUserWithEmailAndPassword(email: widget.email, password: _mdpController.text),
                   await Future.delayed(Duration(seconds: 5)),
                   progressDialog = new ProgressDialog(context, title: Text("Création du compte"), message: Text("Patientez un instant !")),
                   progressDialog.setLoadingWidget(CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(Colors.red))),
