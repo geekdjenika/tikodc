@@ -1,7 +1,8 @@
+import 'package:TikODC/screens/connexion.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ndialog/ndialog.dart';
 
 class InscriptionNext extends StatefulWidget {
   const InscriptionNext({Key? key, required this.email}) : super(key: key);
@@ -32,7 +33,6 @@ class _InscriptionNextState extends State<InscriptionNext> {
 
   @override
   Widget build(BuildContext context) {
-    ProgressDialog progressDialog;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -119,12 +119,19 @@ class _InscriptionNextState extends State<InscriptionNext> {
 
                 onPressed: () async => {
                   await FirebaseAuth.instance.createUserWithEmailAndPassword(email: widget.email, password: _mdpController.text),
-                  await Future.delayed(Duration(seconds: 5)),
-                  progressDialog = new ProgressDialog(context, title: Text("Création du compte"), message: Text("Patientez un instant !")),
-                  progressDialog.setLoadingWidget(CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(Colors.red))),
-                  progressDialog.setTitle(Text("Création de votre compte")),
-                  progressDialog.setMessage(Text("Patientez 5 secondes")),
-                  progressDialog.show(),
+                AwesomeDialog(
+                  context: context,
+                  dialogType: DialogType.info,
+                  animType: AnimType.rightSlide,
+                  title: 'Compte créer avec succès',
+                  desc: 'Connectez-vous pour commencer !',
+                  btnCancelOnPress: () {
+                    Navigator.pop(context);
+                  },
+                  btnOkOnPress: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Connexion()));
+                  },
+                ).show()
 
                 },
               ),
